@@ -5,7 +5,7 @@ args = ["doc"]
 [tasks.enable-hooks]
 description = "Enables or updates Git hooks"
 command = "ln"
-args = ["-sf", "pre-commit.sh", ".git/hooks/pre-commit"]
+args = ["-sf", "../../pre-commit.sh", ".git/hooks/pre-commit"]
 
 [tasks.disable-hooks]
 description = "Disables Git hooks"
