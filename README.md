@@ -6,7 +6,7 @@ A Rust library and CLI for parsing and converting KDF documents.
 ## Pre-Commit Hook
 
 ```shell
-$ cargo make link-hooks
+$ cargo make enable-hooks
 ```
 
 ## Tasks

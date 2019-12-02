@@ -1,6 +1,6 @@
+use kdf::parse_kdf_document;
 use std::path::PathBuf;
 use structopt::StructOpt;
-use kdf::parse_kdf_document;
 
 /// CLI options
 #[derive(StructOpt, Debug)]
