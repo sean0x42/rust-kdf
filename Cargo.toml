@@ -4,13 +4,17 @@
 
 [package]
 name = "kdf"
-version = "0.1.0"
+description = "A Rust library and CLI for parsing and converting KDF documents."
+repository = "https://github.com/sean0x42/rust-kdf"
+version = "0.1.0-alpha"
 authors = ["Sean Bailey <sean@seanbailey.io>"]
 edition = "2018"
+publish = false
 
 [lib]
 name = "kdf"
 path = "src/lib.rs"
 
 [dependencies]
+log = "0.4"
 structopt = "0.3"
