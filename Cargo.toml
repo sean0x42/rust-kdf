@@ -13,3 +13,4 @@ name = "kdf"
 path = "src/lib.rs"
 
 [dependencies]
+structopt = "0.3"

@@ -1,26 +1,13 @@
-[tasks.format]
-description = "Run the cargo rustfmt plugin"
-install_crate = "rustfmt"
+[tasks.docs]
 command = "cargo"
-args = ["fmt"]
+args = ["doc"]
 
-[tasks.clean]
-command = "cargo"
-args = ["clean"]
-
-[tasks.build]
-command = "cargo"
-args = ["build", "--release"]
-dependencies = ["clean"]
-
-[tasks.test]
-command = "cargo"
-args = ["test"]
-dependencies = ["clean"]
-
-[tasks.pre-commit]
-dependencies = ["format", "build", "test"]
-
-[tasks.link-hooks]
+[tasks.enable-hooks]
+description = "Enables or updates Git hooks"
 command = "ln"
-args = ["-s", "pre-commit.sh", ".git/hooks/pre-commit"]
+args = ["-sf", "pre-commit.sh", ".git/hooks/pre-commit"]
+
+[tasks.disable-hooks]
+description = "Disables Git hooks"
+command = "rm"
+args = [".git/hooks/pre-commit"]

@@ -26,3 +26,6 @@ jobs:
     
     - name: Run tests
       run: cargo test --verbose
+
+    - name: Check code style
+      run: cargo fmt --all -- --check

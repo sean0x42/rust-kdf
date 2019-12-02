@@ -1,6 +1,6 @@
 # Rust KDF
 
-A KDF implementation in Rust.
+A Rust library and CLI for parsing and converting KDF documents. 
 
 
 ## Pre-Commit Hook

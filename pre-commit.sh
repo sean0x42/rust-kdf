@@ -1,1 +1,1 @@
-cargo make pre-commit
+cargo make
