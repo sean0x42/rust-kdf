@@ -1,0 +1,1 @@
+cargo make pre-commit

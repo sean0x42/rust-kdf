@@ -1,0 +1,15 @@
+
+# See more keys and their definitions at
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name = "kdf"
+version = "0.1.0"
+authors = ["Sean Bailey <sean@seanbailey.io>"]
+edition = "2018"
+
+[lib]
+name = "kdf"
+path = "src/lib.rs"
+
+[dependencies]
