@@ -1,16 +1,9 @@
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-/// # Metadata
-///
-/// This struct contains all required metadata keys for a valid KDF document,
-/// in accordance with the specification. For a full list of required keys,
-/// see https://kdf.now.sh/specification/metadata.html#required-metadata.
-///
-/// There is more to metadata than required keys however. Applications may use
-/// the metadata file as a generic key-value store, as long as the values are
-/// a valid JSON data type.
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Metadata {
     title: String,
     authors: Vec<String>,
@@ -19,13 +12,13 @@ pub struct Metadata {
     edit_duration: String,
     kdf_version: String,
     supported_mediums: Vec<String>,
+    #[serde(flatten)]
     custom: HashMap<String, MetadataOption>,
 }
 
 pub type MetadataOption = serde_json::Value;
 
 impl Metadata {
-    /// Construct a new metadata struct
     pub fn new(title: String) -> Metadata {
         let now = Utc::now();
         Metadata {
