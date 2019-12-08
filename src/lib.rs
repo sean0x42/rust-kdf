@@ -1,4 +1,5 @@
 mod document;
+pub mod helpers;
 
 use document::Document;
 use std::path::PathBuf;

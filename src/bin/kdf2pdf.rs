@@ -1,7 +1,10 @@
+use kdf::helpers::logging::BinaryLogger;
 use kdf::parse_kdf_document;
-use log::{info, Level, LevelFilter, Metadata, Record, SetLoggerError};
+use log::{info, LevelFilter};
 use std::path::PathBuf;
 use structopt::StructOpt;
+
+static LOGGER: BinaryLogger = BinaryLogger;
 
 /// CLI options
 #[derive(StructOpt, Debug)]
@@ -20,35 +23,12 @@ struct Opt {
     upgrade_prompt: bool,
 }
 
-struct Logger;
-
-impl log::Log for Logger {
-    fn enabled(&self, metadata: &Metadata) -> bool {
-        metadata.level() <= Level::Info
-    }
-
-    fn log(&self, record: &Record) {
-        if self.enabled(record.metadata()) {
-            println!("[{}] {}", record.level(), record.args());
-        }
-    }
-
-    fn flush(&self) {}
-}
-
-static LOGGER: Logger = Logger;
-
-pub fn init() -> Result<(), SetLoggerError> {
-    log::set_logger(&LOGGER).map(|()| log::set_max_level(LevelFilter::Info))
-}
-
 /// Parses a KDF file and exports it to PDF
 pub fn main() {
-    // Init logging
-    match init() {
-        Ok(()) => (),
-        Err(_e) => println!("Failed to init logger"),
-    }
+    // Init logger
+    log::set_logger(&LOGGER)
+        .map(|()| log::set_max_level(LevelFilter::Info))
+        .unwrap();
 
     let args = Opt::from_args();
     let doc = parse_kdf_document(args.input);
