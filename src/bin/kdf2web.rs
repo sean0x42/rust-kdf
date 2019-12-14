@@ -1,12 +1,11 @@
-use kdf::helpers::logging::BinaryLogger;
+use kdf::{helpers::logging::BinaryLogger, parse_kdf_document};
 use log::{info, LevelFilter};
-use std::path::PathBuf;
-use std::str::FromStr;
+use std::{path::PathBuf, str::FromStr};
 use structopt::StructOpt;
 
 static LOGGER: BinaryLogger = BinaryLogger;
 
-/// An enum containing possible CSS output modes
+/// An enum containing possible CSS output modes.
 #[derive(Debug)]
 enum StyleOutputMode {
     /// Save CSS to an external stylesheet.
@@ -22,6 +21,7 @@ enum StyleOutputMode {
 impl FromStr for StyleOutputMode {
     type Err = String;
 
+    /// Create from string
     fn from_str(src: &str) -> Result<StyleOutputMode, Self::Err> {
         match src.to_lowercase().as_str() {
             "external" => Ok(StyleOutputMode::External),
@@ -58,4 +58,7 @@ pub fn main() {
 
     let args = Opt::from_args();
     info!("{:?}", args);
+
+    let document = parse_kdf_document(args.input);
+    info!("{:?}", document);
 }

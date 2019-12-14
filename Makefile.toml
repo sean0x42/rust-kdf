@@ -11,3 +11,30 @@ args = ["-sf", "../../pre-commit.sh", ".git/hooks/pre-commit"]
 description = "Disables Git hooks"
 command = "rm"
 args = [".git/hooks/pre-commit"]
+
+[tasks.bundle-samples]
+description = "Archive and compress example documents."
+script_runner = "python"
+script_extension = "py"
+script = [
+'''
+from os import listdir
+from os.path import isfile, join, basename
+import tarfile
+
+def create_tar(path, extension = "kdf"):
+    source_path = join("examples", path)
+    dest_path = join("examples", "{}.{}".format(path, extension))
+
+    with tarfile.open(dest_path, "w:gz") as tar:
+        for file in listdir(source_path):
+            tar.add(join(source_path, file), arcname=file)
+
+examples = [f for f in listdir("examples") if not isfile(join("examples", f))]
+
+print("Creating example documents...")
+for example in examples:
+    create_tar(example)
+    print("{}.kdf".format(example))
+'''
+]

@@ -2,6 +2,7 @@ use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+/// Contains document metadata
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Metadata {
@@ -12,13 +13,19 @@ pub struct Metadata {
     edit_duration: String,
     kdf_version: String,
     supported_mediums: Vec<String>,
+
+    /// All remaining, custom metadata entries
+    /// Serde will automatically flatten these into the metadata object when
+    /// serializing to JSON for us.
     #[serde(flatten)]
     custom: HashMap<String, MetadataOption>,
 }
 
+/// A possible metadata entry
 pub type MetadataOption = serde_json::Value;
 
 impl Metadata {
+    /// Create a new metadata entry
     pub fn new(title: String) -> Metadata {
         let now = Utc::now();
         Metadata {
