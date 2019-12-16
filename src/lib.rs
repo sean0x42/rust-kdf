@@ -1,4 +1,4 @@
-mod document;
+pub mod document;
 pub mod helpers;
 
 use document::Document;
