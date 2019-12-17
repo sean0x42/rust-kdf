@@ -44,20 +44,21 @@ fn main() {
     // Parse args and delegate to a command handler
     let args = KDF::from_args();
     match args {
-        KDF::New { path, title, force } => new_kdf_command(path, title, force),
-        KDF::Update { .. } => update_kdf_command(args),
+        KDF::New { path, title, force } => handle_new(path, title, force),
+        KDF::Update { .. } => handle_update(args),
     };
 }
 
 /// A command for creating a new KDF document
-fn new_kdf_command(path: Option<PathBuf>, title: Option<String>, _force: bool) {
-    let doc_path = path.unwrap_or(PathBuf::from(r"Unnamed.kdf"));
-    let doc_title = title.unwrap_or(String::from("Unnamed Document"));
+fn handle_new(path: Option<PathBuf>, title: Option<String>, _force: bool) {
+    let doc_path = path.unwrap_or(PathBuf::from(r"Untitled.kdf"));
+    let doc = Document::new(title.unwrap_or(String::from("Untitled Document"));
+    // TODO: Convert document struct into .tar.gz archive and attempt to save to fs.
     info!("{:?}", doc_path);
-    info!("{:?}", doc_title);
+    info!("{:?}", doc);
 }
 
 /// A command for updating a KDF document
-fn update_kdf_command(args: KDF) {
+fn handle_update(args: KDF) {
     info!("Update doc: {:?}", args);
 }
