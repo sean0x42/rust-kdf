@@ -52,7 +52,7 @@ fn main() {
 /// A command for creating a new KDF document
 fn handle_new(path: Option<PathBuf>, title: Option<String>, _force: bool) {
     let doc_path = path.unwrap_or(PathBuf::from(r"Untitled.kdf"));
-    let doc = Document::new(title.unwrap_or(String::from("Untitled Document"));
+    let doc = Document::new(title.unwrap_or(String::from("Untitled Document")));
     // TODO: Convert document struct into .tar.gz archive and attempt to save to fs.
     info!("{:?}", doc_path);
     info!("{:?}", doc);
